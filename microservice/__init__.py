@@ -1,2 +1,5 @@
 from .CustomLanguageModel import CustomLanguageModel
-from .RetrievalSystem import RetrievalSystem
+try:
+    from .RetrievalSystem import RetrievalSystem
+except ImportError:
+    pass

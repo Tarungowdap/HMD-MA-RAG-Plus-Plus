@@ -1,0 +1,362 @@
+[
+  {
+    "id": 1,
+    "question": "How is the Weighted Average Cost of Capital (WACC) calculated, and what does it measure?",
+    "expected_domain": "Financial",
+    "reference_guideline": "Must include formula: WACC = (E/V * Re) + (D/V * Rd * (1 - Tc)). Explain cost of equity, cost of debt, equity/debt proportions, tax shield, and that it measures a firm's hurdle rate."
+  },
+  {
+    "id": 2,
+    "question": "What is the Capital Asset Pricing Model (CAPM) formula and what do its components represent?",
+    "expected_domain": "Financial",
+    "reference_guideline": "Formula: E(Ri) = Rf + Beta * (E(Rm) - Rf). Explain expected return, risk-free rate, beta (systematic risk), and market risk premium."
+  },
+  {
+    "id": 3,
+    "question": "Under IRS rules, what is the wash-sale rule and how does it affect tax deductions for investment losses?",
+    "expected_domain": "Financial",
+    "reference_guideline": "Explain that it prohibits claiming a loss on the sale of a security if a substantially identical security is bought within 30 days before or after the sale (61-day window). The disallowed loss is added to the cost basis of the new security."
+  },
+  {
+    "id": 4,
+    "question": "What is the difference between a Traditional IRA and a Roth IRA regarding tax treatment?",
+    "expected_domain": "Financial",
+    "reference_guideline": "Traditional IRA: Contributions are tax-deductible (pre-tax), withdrawals are taxed as ordinary income. Roth IRA: Contributions are after-tax, qualified withdrawals are 100% tax-free."
+  },
+  {
+    "id": 5,
+    "question": "What does the Sharpe Ratio measure, and what is its mathematical formula?",
+    "expected_domain": "Financial",
+    "reference_guideline": "Formula: (Rp - Rf) / Sigmap. Measures risk-adjusted return (excess return per unit of total risk/volatility)."
+  },
+  {
+    "id": 6,
+    "question": "Explain put-call parity for European options and state its equation.",
+    "expected_domain": "Financial",
+    "reference_guideline": "Equation: C + PV(K) = P + S (Call price + present value of strike price = Put price + spot price). Must state that it prevents arbitrage."
+  },
+  {
+    "id": 7,
+    "question": "What are the option Greeks 'Delta' and 'Gamma', and what do they measure?",
+    "expected_domain": "Financial",
+    "reference_guideline": "Delta: Sensitivity of option price to changes in underlying stock price. Gamma: Rate of change of Delta per unit change in stock price (sensitivity of Delta)."
+  },
+  {
+    "id": 8,
+    "question": "What is the guaranteed annual return of investing in a leveraged 3x S&P 500 ETF over a 10-year period?",
+    "expected_domain": "Financial",
+    "reference_guideline": "Adversarial/Hallucination-inducing. Must state that there is NO guaranteed return and explain daily reset compounding decay (volatility drag) which makes long-term holding highly risky."
+  },
+  {
+    "id": 9,
+    "question": "How is the Debt-to-Equity (D/E) ratio calculated, and how is it interpreted by analysts?",
+    "expected_domain": "Financial",
+    "reference_guideline": "Formula: Total Liabilities / Total Shareholders' Equity. Measures leverage/gearing; high ratio indicates higher default risk but potential to amplify ROE."
+  },
+  {
+    "id": 10,
+    "question": "Under SEC guidelines, what constitutes insider trading and what is the difference between legal and illegal insider trading?",
+    "expected_domain": "Financial",
+    "reference_guideline": "Illegal: Trading securities based on material, non-public information in breach of a duty of trust. Legal: Inside officers trading their own company stocks following SEC reporting rules (e.g. Form 4, 10b5-1 plans)."
+  },
+  {
+    "id": 11,
+    "question": "What is a 'backdoor Roth IRA' contribution, and who is it designed for?",
+    "expected_domain": "Financial",
+    "reference_guideline": "A strategy for high earners exceeding income limits to contribute to a Roth IRA by making a non-deductible Traditional IRA contribution and then converting it to a Roth."
+  },
+  {
+    "id": 12,
+    "question": "How does inflation affect the purchasing power of money and the real return of fixed-income bonds?",
+    "expected_domain": "Financial",
+    "reference_guideline": "Erodes purchasing power. Real return = Nominal return - Inflation rate. High inflation leads to higher nominal interest rates (Fisher effect) and falling bond prices."
+  },
+  {
+    "id": 13,
+    "question": "What are the primary tools a Central Bank (like the Federal Reserve) uses to conduct monetary policy?",
+    "expected_domain": "Financial",
+    "reference_guideline": "Must list: Open market operations (buying/selling bonds), setting reserve requirements, setting the discount rate (or federal funds target rate), and interest on reserves."
+  },
+  {
+    "id": 14,
+    "question": "What is the difference between systematic risk and unsystematic risk in a portfolio?",
+    "expected_domain": "Financial",
+    "reference_guideline": "Systematic: Market-wide risk (inflation, interest rates) that cannot be diversified away. Unsystematic: Firm-specific risk (strikes, lawsuits) that can be eliminated through diversification."
+  },
+  {
+    "id": 15,
+    "question": "How is a company's Net Present Value (NPV) calculated for a capital budgeting project, and what is the decision rule?",
+    "expected_domain": "Financial",
+    "reference_guideline": "NPV = Sum(CFt / (1+r)^t) - Initial Investment. Accept project if NPV > 0; reject if NPV < 0."
+  },
+  {
+    "id": 16,
+    "question": "What is the Internal Rate of Return (IRR), and what is its relation to NPV?",
+    "expected_domain": "Financial",
+    "reference_guideline": "IRR is the discount rate that makes the NPV of all cash flows equal to zero. Accept project if IRR > hurdle rate/WACC."
+  },
+  {
+    "id": 17,
+    "question": "What is Value at Risk (VaR), and what three elements does it require to define risk?",
+    "expected_domain": "Financial",
+    "reference_guideline": "VaR measures potential loss. Requires: A specified confidence level (e.g. 95%), a time horizon (e.g. 1 day), and a maximum loss amount."
+  },
+  {
+    "id": 18,
+    "question": "Explain the concept of 'fiduciary duty' for financial advisors under US regulations.",
+    "expected_domain": "Financial",
+    "reference_guideline": "Advisors must act solely in the best interests of their clients, disclosing conflicts of interest, avoiding misrepresentations, and choosing suitable investments."
+  },
+  {
+    "id": 19,
+    "question": "What is the difference between a stock's dividend yield and its payout ratio?",
+    "expected_domain": "Financial",
+    "reference_guideline": "Dividend Yield: Annual dividend per share / Stock price. Payout Ratio: Total dividends paid / Net income (or dividend per share / EPS)."
+  },
+  {
+    "id": 20,
+    "question": "Under Modern Portfolio Theory, what is the 'Efficient Frontier'?",
+    "expected_domain": "Financial",
+    "reference_guideline": "The set of optimal portfolios that offer the highest expected return for a defined level of risk, or the lowest risk for a given level of expected return."
+  },
+  {
+    "id": 21,
+    "question": "What is quantitative easing (QE), and how does it affect interest rates and asset prices?",
+    "expected_domain": "Financial",
+    "reference_guideline": "Central bank buys long-term securities to inject liquidity directly. Lowers long-term interest rates, boosts asset prices, and expands the central bank's balance sheet."
+  },
+  {
+    "id": 22,
+    "question": "What is short selling, and what is the theoretical maximum loss of a short position?",
+    "expected_domain": "Financial",
+    "reference_guideline": "Borrowing shares to sell them, hoping to buy them back cheaper. Theoretical maximum loss is infinite since a stock price has no upper bound."
+  },
+  {
+    "id": 23,
+    "question": "Explain how the Price-to-Earnings (P/E) ratio is calculated and the difference between trailing and forward P/E.",
+    "expected_domain": "Financial",
+    "reference_guideline": "Formula: Stock price / Earnings per Share (EPS). Trailing uses historical EPS (past 12 months); Forward uses projected future EPS."
+  },
+  {
+    "id": 24,
+    "question": "What is the role of credit rating agencies (e.g., S&P, Moody's) and what constitutes 'investment grade' bonds?",
+    "expected_domain": "Financial",
+    "reference_guideline": "They assess default risk of bond issuers. Investment grade bonds are rated BBB- or higher by S&P/Fitch (or Baa3 or higher by Moody's)."
+  },
+  {
+    "id": 25,
+    "question": "Explain the concept of tax-loss harvesting and its annual limit for offsetting ordinary income.",
+    "expected_domain": "Financial",
+    "reference_guideline": "Selling capital assets at a loss to offset capital gains tax. Net capital losses can offset up to $3,000 of ordinary income per year in the US."
+  },
+  {
+    "id": 26,
+    "question": "What is the difference between equity financing and debt financing for a corporation?",
+    "expected_domain": "Financial",
+    "reference_guideline": "Equity: Selling ownership (shares), no repayment obligation, dilutes control. Debt: Borrowing funds (bonds/loans), must pay interest and principal, interest is tax-deductible."
+  },
+  {
+    "id": 27,
+    "question": "What does a bond's 'Yield to Maturity' (YTM) represent?",
+    "expected_domain": "Financial",
+    "reference_guideline": "The total expected return on a bond if it is held until its maturity date, assuming all coupon payments are reinvested at the same YTM rate."
+  },
+  {
+    "id": 28,
+    "question": "What is market capitalization, and how are micro, mid, and large-cap stocks generally classified?",
+    "expected_domain": "Financial",
+    "reference_guideline": "Formula: Shares outstanding * stock price. Typical limits: Large cap > $10B, mid cap $2B-$10B, small/micro cap < $2B."
+  },
+  {
+    "id": 29,
+    "question": "What is the difference between a margin call and liquidation in a brokerage margin account?",
+    "expected_domain": "Financial",
+    "reference_guideline": "Margin Call: Broker demands the investor deposit more cash/securities because equity fell below maintenance margin. Liquidation: Broker automatically sells assets to cover the shortfall."
+  },
+  {
+    "id": 30,
+    "question": "What is risk-free rate of return, and what security is typically used as its proxy in US markets?",
+    "expected_domain": "Financial",
+    "reference_guideline": "Theoretical return of an investment with zero risk of default. US Treasury Bills (specifically 1-month or 3-month T-bills) are standard proxies."
+  },
+  {
+    "id": 31,
+    "question": "Under Indian Contract Law, can a minor enter into a legally binding agreement, and what is the leading case precedent?",
+    "expected_domain": "Legal",
+    "reference_guideline": "Adversarial/Hallucination-inducing. Under Section 11 of Indian Contract Act, minor agreement is void ab initio (void from the start) and cannot be ratified. Precedent: Mohori Bibee v. Dharmodas Ghose (1903)."
+  },
+  {
+    "id": 32,
+    "question": "Under the Transfer of Property Act, is a verbal agreement to sell a house in Mumbai legally binding?",
+    "expected_domain": "Legal",
+    "reference_guideline": "Adversarial/Hallucination-inducing. Section 54 of Transfer of Property Act and Section 17 of Registration Act require property sales over Rs. 100 to be in writing and registered. Verbal agreement is unenforceable/void."
+  },
+  {
+    "id": 33,
+    "question": "What are the essential elements required to form a legally binding contract?",
+    "expected_domain": "Legal",
+    "reference_guideline": "Must list: Offer, Acceptance, Consideration, Capacity of parties to contract, and Lawful object/Intent to create legal relations."
+  },
+  {
+    "id": 34,
+    "question": "What is the difference between a void contract and a voidable contract?",
+    "expected_domain": "Legal",
+    "reference_guideline": "Void: Unenforceable from the beginning (void ab initio), cannot be ratified. Voidable: Valid until annulled by one party who has the option to rescind (e.g. contract under duress or fraud)."
+  },
+  {
+    "id": 35,
+    "question": "Under US constitutional law, what is the doctrine of judicial review and which landmark Supreme Court case established it?",
+    "expected_domain": "Legal",
+    "reference_guideline": "Power of courts to declare legislative/executive acts unconstitutional. Established in Marbury v. Madison (1803)."
+  },
+  {
+    "id": 36,
+    "question": "What are the elements required to establish a claim of negligence in tort law?",
+    "expected_domain": "Legal",
+    "reference_guideline": "Must list: Duty of care, Breach of that duty, Causation (proximate and actual cause), and Damages/Harm."
+  },
+  {
+    "id": 37,
+    "question": "Under the Information Technology Act, 2000 of India, what constitutes a legally valid digital signature?",
+    "expected_domain": "Legal",
+    "reference_guideline": "Digital signatures are valid under Section 5 if generated via asymmetric crypto systems and hash functions, issued by a licensed Certifying Authority."
+  },
+  {
+    "id": 38,
+    "question": "Explain the concept of 'fair use' in copyright law and list the four factors considered by courts.",
+    "expected_domain": "Legal",
+    "reference_guideline": "Allows limited use of copyrighted material without permission. Factors: Purpose/character of use, nature of work, amount used, and effect on market value."
+  },
+  {
+    "id": 39,
+    "question": "What rights does an accused person have during a criminal trial under the Fifth Amendment of the US Constitution?",
+    "expected_domain": "Legal",
+    "reference_guideline": "Must list: Right against self-incrimination (right to remain silent), double jeopardy protection, and due process of law."
+  },
+  {
+    "id": 40,
+    "question": "What is the 'Business Judgment Rule' in corporate law, and how does it protect board directors?",
+    "expected_domain": "Legal",
+    "reference_guideline": "A presumption that directors act on an informed basis, in good faith, and honest belief that action taken is in company's best interest. Protects them from personal liability."
+  },
+  {
+    "id": 41,
+    "question": "What does 'piercing the corporate veil' mean, and under what circumstances will a court order it?",
+    "expected_domain": "Legal",
+    "reference_guideline": "Holding shareholders/directors personally liable for corporate debts. Occurs in cases of fraud, commingling of personal/corporate assets, or undercapitalization (alter ego)."
+  },
+  {
+    "id": 42,
+    "question": "What is the difference between civil law and criminal law regarding the burden of proof and parties involved?",
+    "expected_domain": "Legal",
+    "reference_guideline": "Civil: Private disputes, burden of proof is 'preponderance of evidence'. Criminal: Offense against society/state, prosecuted by state, burden of proof is 'beyond a reasonable doubt'."
+  },
+  {
+    "id": 43,
+    "question": "Under patent law, what are the three primary criteria an invention must meet to be patentable?",
+    "expected_domain": "Legal",
+    "reference_guideline": "Must list: Novelty (new), Utility (useful), and Non-obviousness to a person skilled in the art."
+  },
+  {
+    "id": 44,
+    "question": "What constitutes a 'breach of contract', and what is the difference between a material and minor breach?",
+    "expected_domain": "Legal",
+    "reference_guideline": "Failure to perform contractual duties without excuse. Material breach permits the non-breaching party to terminate contract and sue. Minor breach only permits suing for damages; performance must continue."
+  },
+  {
+    "id": 45,
+    "question": "What is the 'Statute of Frauds' and what categories of contracts does it typically apply to?",
+    "expected_domain": "Legal",
+    "reference_guideline": "Requires certain contracts to be in writing to be enforceable. Applies to: Sale of land/property, contracts that cannot be performed in 1 year, and sale of goods > $500."
+  },
+  {
+    "id": 46,
+    "question": "Does the US Constitution permit a state to issue its own gold coins under Article I, Section 10?",
+    "expected_domain": "Legal",
+    "reference_guideline": "Adversarial/Hallucination-inducing. Article I, Section 10 explicitly prohibits states from coining money or emitting bills of credit."
+  },
+  {
+    "id": 47,
+    "question": "Under tort law, what is the doctrine of strict liability and when does it apply?",
+    "expected_domain": "Legal",
+    "reference_guideline": "Liability regardless of fault or intent. Applies to abnormally dangerous activities (e.g. blasting), wild animals, and product liability."
+  },
+  {
+    "id": 48,
+    "question": "What are Miranda rights, and at what point is law enforcement required to read them to a suspect?",
+    "expected_domain": "Legal",
+    "reference_guideline": "Rights warning (silent, attorney). Required during custodial interrogation (when a suspect is in custody and subjected to questioning)."
+  },
+  {
+    "id": 49,
+    "question": "What is the difference between a treaty and an executive agreement in US foreign policy?",
+    "expected_domain": "Legal",
+    "reference_guideline": "Treaty requires 2/3 Senate ratification. Executive agreement is made by the President directly, requiring no Senate approval (though congressional-executive agreements require joint approval)."
+  },
+  {
+    "id": 50,
+    "question": "What legal remedy is 'specific performance', and in what types of contract disputes is it typically granted?",
+    "expected_domain": "Legal",
+    "reference_guideline": "Equitable remedy ordering a party to perform the specific act contractually agreed. Granted when money damages are inadequate, primarily unique goods or real estate."
+  },
+  {
+    "id": 51,
+    "question": "What constitutes trademark infringement under the Lanham Act?",
+    "expected_domain": "Legal",
+    "reference_guideline": "Unauthorized use of a trademark that is likely to cause confusion, mistake, or deception among consumers regarding the source of goods."
+  },
+  {
+    "id": 52,
+    "question": "What are the three categories of torts in common law systems?",
+    "expected_domain": "Legal",
+    "reference_guideline": "Must list: Intentional torts (e.g. battery), Negligence, and Strict Liability torts."
+  },
+  {
+    "id": 53,
+    "question": "Explain the legal doctrine of 'Res Ipsa Loquitur' in negligence claims.",
+    "expected_domain": "Legal",
+    "reference_guideline": "Literally: 'the thing speaks for itself'. Shifts the burden of proof to defendant because the injury wouldn't ordinarily occur without negligence, and the instrument was in defendant's exclusive control."
+  },
+  {
+    "id": 54,
+    "question": "What is the difference between a patent and a trade secret regarding protection duration and disclosure?",
+    "expected_domain": "Legal",
+    "reference_guideline": "Patent: Public disclosure required, limited duration (usually 20 years). Trade Secret: Keep confidential (no disclosure), protected indefinitely as long as it remains secret."
+  },
+  {
+    "id": 55,
+    "question": "What is the legal doctrine of 'promissory estoppel' and what are its key requirements?",
+    "expected_domain": "Legal",
+    "reference_guideline": "Enforces a promise without consideration. Requirements: A clear promise, reasonable reliance by the promisee, and injustice if the promise is not enforced."
+  },
+  {
+    "id": 56,
+    "question": "Under corporate law, what are a director's duties of care and loyalty?",
+    "expected_domain": "Legal",
+    "reference_guideline": "Duty of Care: Act with diligence and prudence of a reasonable person. Duty of Loyalty: Avoid self-dealing, act in best interest of company, disclose conflicts."
+  },
+  {
+    "id": 57,
+    "question": "What constitutes tortious interference with a business relationship?",
+    "expected_domain": "Legal",
+    "reference_guideline": "Occurs when a third party intentionally disrupts a valid contract or business relationship of others, causing economic harm."
+  },
+  {
+    "id": 58,
+    "question": "What is the 'exclusionary rule' in criminal procedure under the Fourth Amendment?",
+    "expected_domain": "Legal",
+    "reference_guideline": "Prohibits evidence obtained through illegal searches/seizures from being introduced in a criminal trial against the accused."
+  },
+  {
+    "id": 59,
+    "question": "Explain the difference between mediation and arbitration in alternative dispute resolution.",
+    "expected_domain": "Legal",
+    "reference_guideline": "Mediation: Neutral third party helps parties reach a voluntary settlement (non-binding). Arbitration: Arbitrator acts as judge and issues a final, binding decision (award)."
+  },
+  {
+    "id": 60,
+    "question": "What constitutes negligence 'per se' in tort law?",
+    "expected_domain": "Legal",
+    "reference_guideline": "An act is considered negligent as a matter of law because it violates a statute or regulation designed to protect the class of people injured."
+  }
+]

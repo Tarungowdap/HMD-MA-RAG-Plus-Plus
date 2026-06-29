@@ -72,29 +72,29 @@ def judger(answer: str, target: str, single_answer: bool = True) -> Tuple[str, b
 def process_response(response: ChatCompletion) -> List[Dict[str, Any]]:
     responses = []
     for choice in response.choices:
-        tokens = [cont.token for cont in choice.logprobs.content]
-        if 'token_id:' in tokens[0]:
-            try:
-                think_rindex = len(tokens) - tokens[::-1].index('token_id:151668')  # </think> token
-            except ValueError:
-                think_rindex = 0
-        else:
-            try:
-                think_rindex = len(tokens) - tokens[::-1].index('</think>')  # </think> token
-            except ValueError:
-                think_rindex = 0
         text = choice.message.content
-        token_entropies = [entropy(np.exp([top_logprobs.logprob for top_logprobs in cont.top_logprobs])) for cont in choice.logprobs.content[think_rindex:]]
-        logprobs = [cont.logprob for cont in choice.logprobs.content[think_rindex:]]
-        # entropies = [-cont.logprob * math.exp(cont.logprob) for cont in choice.logprobs.content]
-        # top_logprobs = [[top_logprobs.logprob for top_logprobs in cont.top_logprobs] for cont in choice.logprobs.content]
+        if getattr(choice, 'logprobs', None) is None or getattr(choice.logprobs, 'content', None) is None:
+            token_entropies = [0.0]
+            logprobs = [0.0]
+        else:
+            tokens = [cont.token for cont in choice.logprobs.content]
+            if 'token_id:' in tokens[0]:
+                try:
+                    think_rindex = len(tokens) - tokens[::-1].index('token_id:151668')  # </think> token
+                except ValueError:
+                    think_rindex = 0
+            else:
+                try:
+                    think_rindex = len(tokens) - tokens[::-1].index('</think>')  # </think> token
+                except ValueError:
+                    think_rindex = 0
+            token_entropies = [entropy(np.exp([top_logprobs.logprob for top_logprobs in cont.top_logprobs])) for cont in choice.logprobs.content[think_rindex:]]
+            logprobs = [cont.logprob for cont in choice.logprobs.content[think_rindex:]]
+        
         responses.append({
             'text': text,
-            # 'entropies': entropies,
             'token_entropies': token_entropies,
             'logprobs': logprobs,
-            # 'top_logprobs': top_logprobs,
-            # 'tokens': tokens,
         })
 
     return responses
@@ -122,9 +122,17 @@ def inference(system: str, prompt: str, model: CustomLanguageModel, enable_think
         try:
             for response in responses:
                 if enable_thinking:
-                    reason_content, content = response['text'].rsplit('</think>', maxsplit=1)
+                    if '</think>' in response['text']:
+                        reason_content, content = response['text'].rsplit('</think>', maxsplit=1)
+                        if '<think>' in reason_content:
+                            reason_content = reason_content.split('<think>', maxsplit=1)[1].strip()
+                        else:
+                            reason_content = reason_content.strip()
+                    else:
+                        reason_content = ""
+                        content = response['text']
                     if not check_format or format_check(content.strip()):
-                        return_infos.append([reason_content.split('<think>', maxsplit=1)[1].strip(), content.strip(), response])
+                        return_infos.append([reason_content, content.strip(), response])
                 else:
                     content = response['text']
                     if not check_format or format_check(content.strip()):
@@ -156,17 +164,29 @@ def calculate_accuracy(result_dir: Path):
 class RetrievalService:
     def __init__(self):
         self.host = os.getenv('RETRIEVER_HOST')
+        self.offline = False
 
     @lru_cache(maxsize=8192)
     def retrieve(self, query: str, total_k: int, top_k: Optional[int] = None, num_retrieved_docs: int = 0, combine_docs: bool = False, combine_sep: str = '   ', question: Optional[str] = None, use_reranker: bool = False, min_score: Optional[float] = None):
+        if self.offline:
+            if combine_docs:
+                return "", []
+            return [], []
         request = {'query': query, 'total_k': total_k, 'top_k': top_k, 'combine_docs': combine_docs, 'combine_sep': combine_sep, 'num_retrieved_docs': num_retrieved_docs, 'question': question, 'use_reranker': use_reranker, 'min_score': min_score}
+        response = None
         for _ in range(10):
             try:
-                response = requests.post(f'{self.host}/retriever', json=request, timeout=200).json()
+                response = requests.post(f'{self.host}/retriever', json=request, timeout=2).json()
                 break
             except Exception as e:
-                print(e)
-                sleep(random.uniform(0.0, 2.0))
+                print(f"Retriever connection attempt failed: {e}")
+                sleep(random.uniform(0.1, 0.5))
+        if response is None:
+            print("Retriever service is offline. Bypassing further retriever requests.")
+            self.offline = True
+            if combine_docs:
+                return "", []
+            return [], []
         return response['documents'], response['scores']
 
     def combine_docs(self, docs: List[Dict], combine_sep: str = '\n', num_retrieved_docs: int = 0):
@@ -176,8 +196,20 @@ class RetrievalService:
 class RerankerSyetem:
     def __init__(self):
         self.host = os.getenv('RERANKER_HOST')
+        self.offline = False
 
     def rerank(self, query: str, docs: List[str]):
+        if self.offline:
+            if not docs:
+                return []
+            return [1.0 / len(docs)] * len(docs)
         params = {'query': query, 'docs': docs}
-        response = requests.post(f'{self.host}/reranker', json=params).json()
-        return response['scores']
+        try:
+            response = requests.post(f'{self.host}/reranker', json=params, timeout=2).json()
+            return response['scores']
+        except Exception as e:
+            print(f"Reranker service offline ({e}). Bypassing further rerank requests and returning default uniform scores.")
+            self.offline = True
+            if not docs:
+                return []
+            return [1.0 / len(docs)] * len(docs)

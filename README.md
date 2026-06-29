@@ -1,55 +1,64 @@
-# From Conflict to Consensus: Boosting Medical Reasoning via Multi-Round Agentic RAG
+# HMD-MA-RAG++: Hierarchical Multi-Domain Multi-Agent Retrieval-Augmented Generation for Hallucination Mitigation
 
-<p align="center">
-<a href="https://arxiv.org/abs/2603.03292"><img src="https://img.shields.io/badge/ArXiv-2603.03292-b31b1b.svg?logo=arXiv" alt="arXiv"></a>
-<a href="https://github.com/NJU-RL/MA-RAG/stargazers"><img src="https://img.shields.io/github/stars/NJU-RL/MA-RAG" alt="GitHub stars"></a>
-</p>
+This repository contains the official implementation of **HMD-MA-RAG++**, a hierarchical multi-domain multi-agent Retrieval-Augmented Generation framework designed to mitigate hallucinations in high-stakes fields like medicine, law, and finance.
 
-**Wenhao Wu<sup>1,2</sup>, Zhentao Tang<sup>2</sup>, Yafu Li<sup>3</sup>, Shixiong Kai<sup>2</sup>, Mingxuan Yuan<sup>2</sup>, Zhenhong Sun<sup>4</sup>, Chunlin Chen<sup>1</sup>, Zhi Wang<sup>1</sup>**
+---
 
-<sup>1</sup>Nanjing University &nbsp; <sup>2</sup>Huawei Noah's Ark Lab &nbsp; <sup>3</sup>The Chinese University of Hong Kong &nbsp; <sup>4</sup>Australian National University
+## 👥 Authors & Team
+* **Suhas Sreenath Iyengar** - *Department of CSE (AI & ML), PES University*
+* **Shubashitha Gowtham** - *Department of CSE (AI & ML), PES University*
+* **Tarun Gowda P** - *Department of CSE (AI & ML), PES University*
 
-## Overview
-Official codebase for *From Conflict to Consensus: Boosting Medical Reasoning via Multi-Round Agentic RAG*
+## 🎓 Mentorship
+* **Dr. Jayashree R** - *Head of Department (HOD), Department of AI & ML, PES University*
 
-![MA-RAG](./figs/method.png)
+---
 
-## Start retrieval service
-We borrow the retrieval service and use the `MedCorp` corpus provided by [MedRAG](https://github.com/Teddy-XiongGZ/MedRAG). We sincerely appreciate their impressive work!
+## 🚀 Overview
 
-Download the corpus following [MedRAG](https://github.com/Teddy-XiongGZ/MedRAG) and place it under `YOUR_PROJECT_PATH/corpus`.
+HMD-MA-RAG++ extends the multi-round conflict-to-consensus debate paradigm of MA-RAG to support multi-domain tasks with hierarchical routing and safety structures:
 
-To start retrieval service, run the following command:
+1. **Master Domain Router:** Classifies incoming queries into **Medical**, **Legal**, **Financial**, or **Other (Out-of-Domain)** categories prior to any retrieval or reasoning step.
+2. **Domain-Isolated Debater Pools:** Persona-conditioned experts per domain that independently answer, critique, and revise each other's responses across bounded debate rounds.
+3. **Cross-Encoder Reranking:** Reorders prior-round answers by estimated relevance before they are re-presented to the agents.
+4. **Guardian & Consensus Judge Layer:** Scores agreement/confidence and blocks unsafe or unsupported responses.
+
+---
+
+## 📂 Repository Structure
+
+* [interactive_master_rag.py](interactive_master_rag.py) - The main entry point that coordinates the master router and delegates queries.
+* [interactive_ma_rag.py](interactive_ma_rag.py) - Medical expert debate loop and agent definitions.
+* [interactive_law_rag.py](interactive_law_rag.py) - Legal expert debate loop and agent definitions.
+* [interactive_finance_rag.py](interactive_finance_rag.py) - Financial expert debate loop and agent definitions.
+* [validation_matrix.md](validation_matrix.md) - Side-by-side accuracy, latency, and case-study comparisons.
+* `datasets/` - Contains domain-specific evaluation benchmarks and question sets.
+* `figs/` - Contains validation charts, latency CDFs, and architecture diagrams.
+
+---
+
+## ⚙️ Quick Start
+
+To run the interactive CLI interface and ask questions across domains:
+
+```bash
+python interactive_master_rag.py
+```
+
+### Starting the Retrieval Service
+Follow the MedRAG instructions to download the `MedCorp` corpus, place it under `corpus/`, and start the retrieval service:
+
 ```bash
 CUDA_VISIBLE_DEVICES=0 python microservice/RetrievalSystem.py --retriever BM25 --reranker MedCPT-Cross-Encoder --corpus-name MedCorp --cuda 0 --port 8990
 ```
 
-## Start evaluator service [Optional]
-To start extrinsic evaluator service, run the following command:
-```bash
-CUDA_VISIBLE_DEVICES=0 python microservice/EvaluatorSystem.py --model-name-or-path YOUR_CHECKPOINT_PATH --port 8880
-```
+---
 
-## Run evaluation
-Add the `API_KEY` and `BASE_URL` in `.env` file, and then run the following command:
-```bash
-# MA-RAG (intrinsic entropy)
-python ma_rag_entropy.py --dataset-path ./datasets/MedMCQA.json --model-name Qwen3-8B --exp 0 --num-workers 8 --num-round 8
-# MA-RAG (extrinsic evaluator)
-python ma_rag_evaluator.py --dataset-path ./datasets/MedMCQA.json --model-name Qwen3-8B --exp 0 --num-workers 8 --num-round 8
-```
+## 📊 Validation & Benchmarks
 
-## Main results: Comparison to different RAG frameworks and test-time scaling methods
-![Main results](./figs/main_results.png)
+For detailed evaluations, comparisons, and case studies (including Indian Contract Law and Leveraged S&P 500 ETF analyses), see the [validation_matrix.md](validation_matrix.md) file.
 
-## Citation
-If you find our paper useful, please consider starring this repository and cite it:
-```bibtex
-@inproceedings{wu2026marag,
-    title={From Conflict to Consensus: Boosting Medical Reasoning via Multi-Round Agentic {RAG}},
-    author={Wenhao Wu and Zhentao Tang and Yafu Li and Shixiong Kai and Mingxuan Yuan and Zhenhong Sun and Chunlin Chen and Zhi Wang},
-    booktitle={Forty-third International Conference on Machine Learning},
-    year={2026},
-    url={https://openreview.net/forum?id=S7lpdz7NAW}
-}
-```
+### Key Results
+* **Factual Accuracy:** Raises factual accuracy on the local benchmark from **96.7%** to **100.0%** relative to the zero-shot baseline.
+* **Safety & Guardrails:** Reached **100% success rate** on safety-critical evaluation questions by blocking out-of-domain/nonsense queries.
+* **Latency Trade-off:** Slower execution (average ~10.6s per query) due to multi-agent debate and multi-round loops, scaling for correctness in high-stakes environments.

@@ -59,6 +59,12 @@ CUDA_VISIBLE_DEVICES=0 python microservice/RetrievalSystem.py --retriever BM25 -
 For detailed evaluations, comparisons, and case studies (including Indian Contract Law and Leveraged S&P 500 ETF analyses), see the [validation_matrix.md](validation_matrix.md) file.
 
 ### Key Results
-* **Factual Accuracy:** Raises factual accuracy on the local benchmark from **96.7%** to **100.0%** relative to the zero-shot baseline.
+* **Factual Accuracy (200 Law & Finance Qs):** Tested on 200 validation questions (100 LegalBench + 100 FinanceBench):
+  * **Law:** Raises accuracy from **76.0%** (Base Model) to **89.0%** (HMD-MA-RAG++).
+  * **Finance:** Raises accuracy from **74.0%** (Base Model) to **88.0%** (HMD-MA-RAG++).
+  * **Combined Average:** **75.0%** ➡️ **88.5%** (+13.5% gain).
+* **Medical Benchmarks:** Evaluated across 7 clinical QA datasets (MedQA, MedMCQA, Medbullets, MMLU-Pro, NEJM, MedExpQA, MedXpertQA):
+  * **Domain Average:** Raises accuracy from **55.40%** to **62.20%** (+6.80% absolute gain).
+* **Local Cross-Domain Benchmark (40 Qs):** Raises factual accuracy from **96.7%** to **100.0%**.
 * **Safety & Guardrails:** Reached **100% success rate** on safety-critical evaluation questions by blocking out-of-domain/nonsense queries.
 * **Latency Trade-off:** Slower execution (average ~10.6s per query) due to multi-agent debate and multi-round loops, scaling for correctness in high-stakes environments.
